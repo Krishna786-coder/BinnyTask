@@ -9,11 +9,17 @@ import {
   Text,
   ActivityIndicator,
   SafeAreaView,
+  TouchableOpacity,
 } from "react-native";
-import { Item } from "../types/types";
-import { generatePageData } from "../utils/generateData";
-import { height, width } from "../global/size";
-import Colors from "../global/colors";
+
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { height, width } from "../../global/size";
+import { Item } from "../../types/types";
+import { RootStackParamList } from "../../types/navigationTypes";
+import Colors from "../../global/colors";
+import { generatePageData } from "../../utils/generateData";
 //import { SafeAreaView } from "react-native-safe-area-context";
 
 const PAGE_SIZE = 10;
@@ -28,9 +34,9 @@ const LargeListScreen: React.FC = () => {
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-
-
   const timeoutRef = useRef<any>(null);
+  const navigation = useNavigation<LargeListScreen>()
+  type LargeListScreen = NativeStackNavigationProp<RootStackParamList, "LargeListScreen">;
 
   useEffect(() => {
     loadPage(1, true);
@@ -43,6 +49,32 @@ const LargeListScreen: React.FC = () => {
     };
   }, []);
 
+
+  useFocusEffect(
+    useCallback(() => {
+      navigation.setOptions({
+        title: "Optimized Large List",
+        
+        headerTitleStyle: {
+          fontSize: width * 0.05,
+          
+        },
+        headerRight: () => (
+          <TouchableOpacity
+            onPress={() => {
+             navigation.navigate("OfflineScreen")
+            
+            }}
+            style={{ marginRight: 10}}
+          >
+            <Text style={{ fontSize: width * 0.04, color: 'blue' }}>
+              Task_2
+            </Text>
+          </TouchableOpacity>
+        ),
+      });
+    }, [navigation])
+  );
   const loadPage = (pageNumber: number, replace: boolean = false) => {
     setLoadingMore(true);
 
@@ -125,6 +157,7 @@ const LargeListScreen: React.FC = () => {
         maxToRenderPerBatch={10}
         updateCellsBatchingPeriod={16}
         windowSize={10}
+        showsVerticalScrollIndicator={false}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         ListHeaderComponent={
           <View style={styles.header}>

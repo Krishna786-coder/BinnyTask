@@ -1,13 +1,12 @@
-import { View, Text } from 'react-native'
 import React from 'react'
-import LargeListScreen from './src/optimizedList/LargeListScreen'
+import RootStack from './src/navigation/RootStack'
 
 const App = () => {
   return (
   
-      <LargeListScreen/>
+     <RootStack/>
 
   )
 }
 
-export default App
+export default App;

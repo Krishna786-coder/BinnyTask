@@ -4,3 +4,11 @@ export type Item = {
     subtitle: string;
   };
   
+
+  export interface User {
+    id: number;
+    name: string;
+    username: string;
+    email: string;
+  }
+  
