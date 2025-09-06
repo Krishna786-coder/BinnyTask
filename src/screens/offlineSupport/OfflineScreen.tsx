@@ -20,58 +20,54 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 const API_URL = "https://jsonplaceholder.typicode.com/users";
 const STORAGE_KEY = "@users_data";
 
-
-
 const OfflineScreen = () => {
   const [data, setData] = useState<User[] | null>(null);
   const [loading, setLoading] = useState(true);
-  type OfflineScreenNavigationProps= NativeStackNavigationProp<RootStackParamList, "LargeListScreen">;
 
-  const navigation = useNavigation<OfflineScreenNavigationProps>()
+  type OfflineScreenNavigationProps = NativeStackNavigationProp<
+    RootStackParamList,
+    "LargeListScreen"
+  >;
+
+  const navigation = useNavigation<OfflineScreenNavigationProps>();
 
 
-   useFocusEffect(
-      useCallback(() => {
-        navigation.setOptions({
-          title: "Offline Support",
-          
-          headerTitleStyle: {
-            fontSize: width * 0.05,
-            
-          },
-          headerRight: () => (
-            <TouchableOpacity
-              onPress={() => {
-               navigation.navigate("SecureToken")
-              
-              }}
-              style={{ marginRight: 10}}
-            >
-              <Text style={{ fontSize: width * 0.04, color: 'blue' }}>
-                Task_3
-              </Text>
-            </TouchableOpacity>
-          ),
-        });
-      }, [navigation])
-    );
+  useFocusEffect(
+    useCallback(() => {
+      navigation.setOptions({
+        title: "Offline Support",
+        headerTitleStyle: {
+          fontSize: width * 0.05,
+        },
+        headerRight: () => (
+          <TouchableOpacity
+            onPress={() => navigation.navigate("SecureToken")}
+            style={{ marginRight: 10 }}
+          >
+            <Text style={{ fontSize: width * 0.04, color: "blue" }}>
+              Task_3
+            </Text>
+          </TouchableOpacity>
+        ),
+      });
+    }, [navigation])
+  );
 
+  // Load data from AsyncStorage or API
   const loadData = async () => {
     try {
-
       const cachedData = await AsyncStorage.getItem(STORAGE_KEY);
       if (cachedData) {
         setData(JSON.parse(cachedData));
         setLoading(false);
-        return; 
+        return;
       }
 
-   
       const response = await fetch(API_URL);
-      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+      if (!response.ok)
+        throw new Error(`HTTP error! Status: ${response.status}`);
       const jsonData: User[] = await response.json();
 
-    
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(jsonData));
 
       setData(jsonData);
@@ -89,13 +85,15 @@ const OfflineScreen = () => {
 
   if (loading)
     return (
-      <SafeAreaView style={[styles.container, { backgroundColor: Colors.grayBackground }]}>
+      <SafeAreaView
+        style={[styles.centerContainer, { backgroundColor: Colors.white }]}
+      >
         <ActivityIndicator size="large" color={Colors.black} />
       </SafeAreaView>
     );
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: Colors.grayBackground }]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: Colors.white }]}>
       <FlatList
         data={data || []}
         keyExtractor={(item) => item.id.toString()}
@@ -114,6 +112,11 @@ const OfflineScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  centerContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   itemContainer: {
     backgroundColor: Colors.white,

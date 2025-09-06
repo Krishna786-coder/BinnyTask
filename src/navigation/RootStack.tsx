@@ -6,6 +6,8 @@ import { RootStackParamList } from '../types/navigationTypes';
 import LargeListScreen from '../screens/optimizedList/LargeListScreen';
 import OfflineScreen from '../screens/offlineSupport/OfflineScreen';
 import SecureToken from '../screens/secureTokenStorage/SecureToken';
+import ProductListScreen from '../screens/globalState/ProductScreen';
+import CartScreen from '../screens/globalState/CartScreen';
 
 
 
@@ -32,6 +34,13 @@ const RootStack = () => {
     
     component={SecureToken} 
     name={"SecureToken"}/>
+           <Stack.Screen 
+     component={ProductListScreen} 
+    name={"ProductListScreen"}/>
+          <Stack.Screen 
+     component={CartScreen} 
+    name={"CartScreen"}
+    />
       </Stack.Navigator>
 
     </NavigationContainer>

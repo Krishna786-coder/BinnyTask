@@ -1,11 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
 import * as Keychain from "react-native-keychain";
 import Colors from "../../global/colors";
 import { height, width } from "../../global/size";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../types/navigationTypes";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 const SecureToken = () => {
   const [token, setToken] = useState<string | null>(null);
+  type SecureTokenScreenNavigationProps = NativeStackNavigationProp<
+    RootStackParamList,
+    "SecureToken"
+  >;
+
+  const navigation = useNavigation<SecureTokenScreenNavigationProps>();
+
+   useFocusEffect(
+      useCallback(() => {
+        navigation.setOptions({
+          title: "Secure Token",
+          headerTitleStyle: {
+            fontSize: width * 0.05,
+          },
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ProductListScreen")}
+              style={{ marginRight: 10 }}
+            >
+              <Text style={{ fontSize: width * 0.04, color: "blue" }}>
+                Task_4
+              </Text>
+            </TouchableOpacity>
+          ),
+        });
+      }, [navigation])
+    );
 
   const saveToken = async () => {
     try {
