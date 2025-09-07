@@ -3,5 +3,6 @@ export type RootStackParamList = {
     OfflineScreen:undefined;
     SecureToken:undefined;
     ProductListScreen:undefined;
-    CartScreen:undefined
+    CartScreen:undefined;
+    SplashScreen:undefined;
 };
