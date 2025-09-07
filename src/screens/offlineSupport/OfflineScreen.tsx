@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   StyleSheet,
   TouchableOpacity,
+  StatusBar
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Colors from "../../global/colors";
@@ -16,6 +17,7 @@ import { User } from "../../types/types";
 import { RootStackParamList } from "../../types/navigationTypes";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
+
 
 const API_URL = "https://jsonplaceholder.typicode.com/users";
 const STORAGE_KEY = "@users_data";
@@ -53,7 +55,7 @@ const OfflineScreen = () => {
     }, [navigation])
   );
 
-  // Load data from AsyncStorage or API
+
   const loadData = async () => {
     try {
       const cachedData = await AsyncStorage.getItem(STORAGE_KEY);
@@ -94,6 +96,7 @@ const OfflineScreen = () => {
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: Colors.white }]}>
+    <StatusBar backgroundColor={Colors.white} barStyle="dark-content" />
       <FlatList
         data={data || []}
         keyExtractor={(item) => item.id.toString()}

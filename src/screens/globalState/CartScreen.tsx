@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  StatusBar,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/Store/store';
@@ -51,6 +52,7 @@ const CartScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
+    <StatusBar backgroundColor={Colors.white} barStyle="dark-content" />
       {cartItems.length === 0 ? (
         <View style={styles.empty}>
           <Text style={styles.emptyText}>Your cart is empty</Text>

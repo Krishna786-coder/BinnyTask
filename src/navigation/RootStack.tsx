@@ -10,16 +10,16 @@ import SecureToken from '../screens/secureTokenStorage/SecureToken';
 import ProductListScreen from '../screens/globalState/ProductScreen';
 import CartScreen from '../screens/globalState/CartScreen';
 
+
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: true}} initialRouteName="SplashScreen">
-    
+ 
         <Stack.Screen name="SplashScreen" component={SplashScreen}  options={{headerShown:false}}/>
-
-
         <Stack.Screen name="LargeListScreen" component={LargeListScreen} />
         <Stack.Screen name="OfflineScreen" component={OfflineScreen} />
         <Stack.Screen name="SecureToken" component={SecureToken} />

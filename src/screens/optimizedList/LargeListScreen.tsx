@@ -10,6 +10,8 @@ import {
   ActivityIndicator,
   SafeAreaView,
   TouchableOpacity,
+  NativeModules,
+  Platform,
 } from "react-native";
 
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -29,6 +31,9 @@ const ITEM_HEIGHT = height * 0.08;
 const AVATAR_SIZE = width * 0.1;
 const PADDING_HORIZONTAL = width * 0.04;
 
+
+const { DeviceModule } = NativeModules;
+
 const LargeListScreen: React.FC = () => {
   const [data, setData] = useState<Item[]>([]);
   const [page, setPage] = useState(1);
@@ -36,18 +41,31 @@ const LargeListScreen: React.FC = () => {
   const [refreshing, setRefreshing] = useState(false);
   const timeoutRef = useRef<any>(null);
   const navigation = useNavigation<LargeListScreen>()
+  const [osVersion, setOsVersion] = useState('');
+
   type LargeListScreen = NativeStackNavigationProp<RootStackParamList, "LargeListScreen">;
 
   useEffect(() => {
     loadPage(1, true);
 
-   
+    if (DeviceModule) {
+      DeviceModule.getOSVersion()
+        .then((version:any) => setOsVersion(version))
+        .catch((err:any) => console.log(err));
+    } else {
+      console.log('DeviceModule is null');
+    }
+
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
     };
   }, []);
+
+
+
+
 
 
   useFocusEffect(
@@ -142,8 +160,8 @@ const LargeListScreen: React.FC = () => {
   const reachedEnd = data.length >= TOTAL_ITEMS;
 
   return (
-    <SafeAreaView style={styles.safe}>
-      <StatusBar barStyle="dark-content" />
+    <SafeAreaView style={styles.safe}> 
+      <StatusBar backgroundColor={Colors.white} barStyle="dark-content" />
       <FlatList
         data={data}
         keyExtractor={keyExtractor}
@@ -163,8 +181,13 @@ const LargeListScreen: React.FC = () => {
           <View style={styles.header}>
             <Text style={styles.headerTitle}>Paginated List (10 per page)</Text>
             <Text style={styles.headerCaption}>
-              Loads data page by page with footer spinner
-            </Text>
+  {osVersion
+    ? Platform.OS === 'android'
+      ? `Android OS Version: ${osVersion}`
+      : `iOS Version: ${osVersion}`
+    : 'Fetching OS Version...'}
+</Text>
+
           </View>
         }
         ListFooterComponent={
@@ -214,7 +237,7 @@ const styles = StyleSheet.create({
       backgroundColor: Colors.white,
     },
     headerTitle: { fontSize: width * 0.05, fontWeight: "800", color: Colors.black },
-    headerCaption: { marginTop: 4, fontSize: width * 0.035, color: Colors.grayMedium },
+    headerCaption: { marginTop: 4, fontSize: width * 0.035, color: Colors.black},
     footer: { paddingVertical: height * 0.02, alignItems: "center", justifyContent: "center" },
     endText: { color: Colors.grayMedium, fontSize: width * 0.04 },
   });

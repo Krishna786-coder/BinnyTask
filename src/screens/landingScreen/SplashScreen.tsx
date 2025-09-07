@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, StatusBar } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types/navigationTypes';
 import { height, width } from '../../global/size';
@@ -21,6 +21,7 @@ const SplashScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+    <StatusBar backgroundColor={Colors.black} barStyle="dark-content" />
       <Image
         source={require('../../assets/Logo.jpeg')} 
         style={styles.logo}

@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Dimensions,
   SafeAreaView,
+  StatusBar,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -94,6 +95,7 @@ const ProductListScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
+   <StatusBar backgroundColor={Colors.white} barStyle="dark-content" />
       <FlatList
         data={products}
         keyExtractor={item => item.id.toString()}

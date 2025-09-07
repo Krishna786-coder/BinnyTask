@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, StatusBar } from "react-native";
 import * as Keychain from "react-native-keychain";
 import Colors from "../../global/colors";
 import { height, width } from "../../global/size";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../types/navigationTypes";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
+
 
 const SecureToken = () => {
   const [token, setToken] = useState<string | null>(null);
@@ -65,6 +66,7 @@ const SecureToken = () => {
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: Colors.white }]}>
+      <StatusBar backgroundColor={Colors.white} barStyle="dark-content" />
       <View style={styles.content}>
         <Text style={styles.label}>Stored Token:</Text>
         <Text style={styles.token}>{token || "No token found"}</Text>
