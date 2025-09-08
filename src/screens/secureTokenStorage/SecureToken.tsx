@@ -22,14 +22,14 @@ const SecureToken = () => {
         navigation.setOptions({
           title: "Secure Token",
           headerTitleStyle: {
-            fontSize: width * 0.05,
+            fontSize: width * 0.055,
           },
           headerRight: () => (
             <TouchableOpacity
               onPress={() => navigation.navigate("ProductListScreen")}
               style={{ marginRight: 10 }}
             >
-              <Text style={{ fontSize: width * 0.04, color: "blue" }}>
+              <Text style={{ fontSize: width * 0.045, color: "blue" }}>
                 Task_4
               </Text>
             </TouchableOpacity>

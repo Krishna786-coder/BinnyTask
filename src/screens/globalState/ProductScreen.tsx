@@ -58,7 +58,7 @@ const ProductListScreen: React.FC = () => {
       navigation.setOptions({
         title: "Product List Screen",
         headerTitleStyle: {
-          fontSize: width * 0.05,
+          fontSize: width * 0.055,
         },
         headerRight: () => (
           <TouchableOpacity
@@ -146,29 +146,31 @@ const styles = StyleSheet.create({
   cartButton: { backgroundColor: Colors.black, padding: 12, borderRadius: 5, alignItems: 'center', marginTop: 10 },
   cartButtonText: { color: Colors.white, fontWeight: 'bold' },
   cartContainer: {
-    width: 30,
-    height: 30,
+    width: width * 0.08, 
+    height: width * 0.08,
+    justifyContent: "center",
+    alignItems: "center",
   },
   cartImage: {
-    width: 30,
-    height: 30,
+    width: width * 0.075,
+    height: width * 0.075,
     resizeMode: "contain",
   },
   badge: {
     position: "absolute",
-    right: -5,
-    top: -5,
+    right: -width * 0.005, 
+    top: -width * 0.005,
     backgroundColor: "red",
-    borderRadius: 8,
-    paddingHorizontal: 4,
-    paddingVertical: 1,
-    minWidth: 16,
+    borderRadius: width * 0.025, 
+    paddingHorizontal: width * 0.012,
+    minWidth: width * 0.045,
+    height: width * 0.045,
     alignItems: "center",
     justifyContent: "center",
   },
   badgeText: {
     color: "white",
-    fontSize: width * 0.025,
+    fontSize: width * 0.03,
     fontWeight: "bold",
   },
 });

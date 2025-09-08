@@ -74,7 +74,7 @@ const LargeListScreen: React.FC = () => {
         title: "Optimized Large List",
         
         headerTitleStyle: {
-          fontSize: width * 0.05,
+          fontSize: width * 0.055,
           
         },
         headerRight: () => (
@@ -85,7 +85,7 @@ const LargeListScreen: React.FC = () => {
             }}
             style={{ marginRight: 10}}
           >
-            <Text style={{ fontSize: width * 0.04, color: 'blue' }}>
+            <Text style={{ fontSize: width * 0.045, color: 'blue' }}>
               Task_2
             </Text>
           </TouchableOpacity>
@@ -185,7 +185,7 @@ const LargeListScreen: React.FC = () => {
     ? Platform.OS === 'android'
       ? `Android OS Version: ${osVersion}`
       : `iOS Version: ${osVersion}`
-    : 'Fetching OS Version...'}
+    : ''}
 </Text>
 
           </View>

@@ -39,14 +39,14 @@ const OfflineScreen = () => {
       navigation.setOptions({
         title: "Offline Support",
         headerTitleStyle: {
-          fontSize: width * 0.05,
+          fontSize: width * 0.055,
         },
         headerRight: () => (
           <TouchableOpacity
             onPress={() => navigation.navigate("SecureToken")}
             style={{ marginRight: 10 }}
           >
-            <Text style={{ fontSize: width * 0.04, color: "blue" }}>
+            <Text style={{ fontSize: width * 0.045, color: "blue" }}>
               Task_3
             </Text>
           </TouchableOpacity>
